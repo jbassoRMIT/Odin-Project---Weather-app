@@ -54,6 +54,11 @@ const fetchWeather= async function(city){
     list.appendChild(tempList);
     list.appendChild(minTempList);
     list.appendChild(maxTempList);
+
+    //add a section to display icon
+    const iconDisplay=document.createElement("img");
+    iconDisplay.src=`./Icons/${icon}.svg`;
+    weatherResults.appendChild(iconDisplay);
 }
 
 //add event listener to form
