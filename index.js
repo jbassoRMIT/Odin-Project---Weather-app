@@ -1,4 +1,6 @@
 const weatherResults=document.querySelector(".weatherResults");
+const form=document.querySelector("form");
+const citySearch=document.querySelector("#city");
 
 const key="Q4ZEAHEY26Q25F7A4ZP6YLT6H"
 
@@ -15,4 +17,10 @@ const fetchWeather= async function(city){
     weatherResults.textContent=`The weather today in ${address} is ${conditions}. Min temp: ${minTemp}, Max temp: ${maxTemp}`;
 }
 
-fetchWeather("Toronto");
+//add event listener to form
+form.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const city=citySearch.value;
+    fetchWeather(city);
+})
+
