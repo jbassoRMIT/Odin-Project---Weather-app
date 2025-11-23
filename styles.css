@@ -1,3 +1,21 @@
 h1{
     font-family: "Sixtyfour";
 }
+
+.weatherResults{
+    height: 200px;
+    border: 1px solid black;
+    margin-top: 5px;
+}
+
+.cold{
+    border-color: blue;
+}
+
+.mild{
+    border-color: rgb(208, 208, 81);
+}
+
+.warm{
+    border-color: rgb(185, 6, 6);
+}
