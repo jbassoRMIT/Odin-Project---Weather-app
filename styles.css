@@ -20,3 +20,8 @@ h1{
 .warm{
     border-color: rgb(185, 6, 6);
 }
+
+.weatherIcon{
+    width: 30px;
+    height: 30px;
+}

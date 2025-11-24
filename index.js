@@ -57,6 +57,7 @@ const fetchWeather= async function(city){
 
     //add a section to display icon
     const iconDisplay=document.createElement("img");
+    iconDisplay.className="weatherIcon";
     iconDisplay.src=`./Icons/${icon}.svg`;
     weatherResults.appendChild(iconDisplay);
 }
