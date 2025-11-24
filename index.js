@@ -46,6 +46,7 @@ const fetchWeather= async function(city,units){
 
     //clear contents of weatherDisplay
     removeChilden(weatherResults);
+    removeChilden(toggleUnits);
 
     //display data as a list
     const listHeader=document.createElement("p");
@@ -78,7 +79,26 @@ const fetchWeather= async function(city,units){
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     const city=citySearch.value;
-    const units=unitChoice.value;
+    let units=unitChoice.value;
     fetchWeather(city,units);
+
+    //add button to toggleUnits div, allowing user to toggle units
+    const toggleUnitsButton =document.createElement("button");
+    toggleUnitsButton.textContent="toggle Units";
+    toggleUnits.appendChild(toggleUnitsButton);
+
+    //add event listener to the button
+    toggleUnitsButton.addEventListener("click",()=>{
+        removeChilden(toggleUnits);
+        if(units=="celcius"){
+            units="fahrenheit";
+        }
+        else{
+            units="celcius";
+        }
+        fetchWeather(city,units);
+    })
 })
+
+
 
