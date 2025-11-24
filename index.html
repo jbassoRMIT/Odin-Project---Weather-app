@@ -15,9 +15,15 @@
     <form action="">
         <label for="city">Enter city: </label>
         <input type="text" name="city" id="city"><br>
+        <label for="units">Select fahrenheit or celcius</label><br>
+        <select name="units" id="units">
+            <option value="celcius">celcius</option>
+            <option value="fahrenheit">fahrenheit</option>
+        </select><br>
         <button type="submit">Search</button>
     </form>
     <div class="weatherResults"></div>
+    <div class="toggleUnits"></div>
     <script src="index.js"></script>
 </body>
 </html>

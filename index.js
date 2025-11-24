@@ -1,6 +1,8 @@
 const weatherResults=document.querySelector(".weatherResults");
 const form=document.querySelector("form");
 const citySearch=document.querySelector("#city");
+const unitChoice=document.querySelector("#units");
+const toggleUnits=document.querySelector(".toggleUnits");
 
 const key="Q4ZEAHEY26Q25F7A4ZP6YLT6H"
 
@@ -12,8 +14,18 @@ const removeChilden=function(parent){
 }
 
 //write function to  fetch weather data and display to console
-const fetchWeather= async function(city){
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=Q4ZEAHEY26Q25F7A4ZP6YLT6H&contentType=json`);
+const fetchWeather= async function(city,units){
+    let response="";
+    let degreeUnits="";
+    if(units=="celcius"){
+        response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=Q4ZEAHEY26Q25F7A4ZP6YLT6H&contentType=json`);
+        degreeUnits="℃"
+    }
+    else if(units=="fahrenheit"){
+        response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=us&include=days&key=Q4ZEAHEY26Q25F7A4ZP6YLT6H&contentType=json`);
+        degreeUnits="℉"
+    }
+ 
     const results=await response.json();
     console.log(results);
     const address=city;
@@ -42,11 +54,11 @@ const fetchWeather= async function(city){
     const conditionList=document.createElement("li");
     conditionList.textContent=`Conditions: ${conditions}`;
     const tempList=document.createElement("li");
-    tempList.textContent=`Temp: ${temp}`;
+    tempList.textContent=`Temp: ${temp} ${degreeUnits}`;
     const minTempList=document.createElement("li");
-    minTempList.textContent=`Min temp: ${minTemp}`;
+    minTempList.textContent=`Min temp: ${minTemp} ${degreeUnits}`;
     const maxTempList=document.createElement("li");
-    maxTempList.textContent=`Max temp: ${maxTemp}`;
+    maxTempList.textContent=`Max temp: ${maxTemp} ${degreeUnits}`;
 
     weatherResults.appendChild(listHeader);
     weatherResults.appendChild(list);
@@ -66,6 +78,7 @@ const fetchWeather= async function(city){
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     const city=citySearch.value;
-    fetchWeather(city);
+    const units=unitChoice.value;
+    fetchWeather(city,units);
 })
 
