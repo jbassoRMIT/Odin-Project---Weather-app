@@ -25,3 +25,8 @@ h1{
     width: 30px;
     height: 30px;
 }
+
+.giphDisplay img{
+    width: 100px;
+    height: 100px;
+}

@@ -13,6 +13,15 @@ const removeChilden=function(parent){
         }
 }
 
+//write function to convert celcius to fahrenheit and vice versa
+const celciusToF=function(degrees){
+    return (degrees*1.8+32);
+}
+
+const fahrenheitToC=function(degrees){
+    return ((degrees-32)/1.8);
+}
+
 //write function to  fetch weather data and display to console
 const fetchWeather= async function(city,units){
     let response="";
@@ -30,9 +39,9 @@ const fetchWeather= async function(city,units){
     console.log(results);
     const address=city;
     const conditions=results.days[0].conditions;
-    const temp=results.days[0].temp;
-    const minTemp=results.days[0].tempmin;
-    const maxTemp=results.days[0].tempmax;
+    let temp=results.days[0].temp;
+    let minTemp=results.days[0].tempmin;
+    let maxTemp=results.days[0].tempmax;
     const icon=results.days[0].icon;
 
     if(temp<10){
@@ -46,7 +55,6 @@ const fetchWeather= async function(city,units){
 
     //clear contents of weatherDisplay
     removeChilden(weatherResults);
-    removeChilden(toggleUnits);
 
     //display data as a list
     const listHeader=document.createElement("p");
@@ -78,6 +86,7 @@ const fetchWeather= async function(city,units){
 //add event listener to form
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
+    removeChilden(toggleUnits);
     const city=citySearch.value;
     let units=unitChoice.value;
     fetchWeather(city,units);
@@ -89,16 +98,43 @@ form.addEventListener("submit",(e)=>{
 
     //add event listener to the button
     toggleUnitsButton.addEventListener("click",()=>{
-        removeChilden(toggleUnits);
         if(units=="celcius"){
             units="fahrenheit";
+            // degreeUnits="℃";
+            // temp=celciusToF(temp);
+            // minTemp=celciusToF(minTemp);
+            // maxTemp=celciusToF(maxTemp);
+            // tempList.textContent=`Temp: ${temp} ${degreeUnits}`;
+            // minTempList.textContent=`Min temp: ${minTemp} ${degreeUnits}`;
+            // maxTempList.textContent=`Min temp: ${maxTemp} ${degreeUnits}`;
         }
         else{
             units="celcius";
+            // degreeUnits="℃";
+            // temp=fahrenheitToC(temp);
+            // minTemp=fahrenheitToC(minTemp);
+            // maxTemp=fahrenheitToC(maxTemp);
+            // tempList.textContent=`Temp: ${temp} ${degreeUnits}`;
+            // minTempList.textContent=`Min temp: ${minTemp} ${degreeUnits}`;
+            // maxTempList.textContent=`Min temp: ${maxTemp} ${degreeUnits}`;
         }
         fetchWeather(city,units);
     })
 })
+
+//Try setting cityImage to a pic of toronto
+const gif=document.querySelector(".giphDisplay img");
+
+//write function to get gif from giphy
+const getGif= async function(searchTerm){
+    const response=await fetch(`https://api.giphy.com/v1/gifs/search?api_key=lSaPK1xtdipOD5FBO6qLflCfev5umows&q=${searchTerm}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
+    const results=await response.json();
+    console.log(results);
+    const url=results.data[0].images.original.url;
+    gif.src=url;
+}
+
+getGif("soccer");
 
 
 
