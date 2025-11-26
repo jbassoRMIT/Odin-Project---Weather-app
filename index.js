@@ -3,6 +3,7 @@ const form=document.querySelector("form");
 const citySearch=document.querySelector("#city");
 const unitChoice=document.querySelector("#units");
 const toggleUnits=document.querySelector(".toggleUnits");
+const gif=document.querySelector(".giphDisplay img");
 
 const key="Q4ZEAHEY26Q25F7A4ZP6YLT6H"
 
@@ -81,6 +82,18 @@ const fetchWeather= async function(city,units){
     iconDisplay.className="weatherIcon";
     iconDisplay.src=`./Icons/${icon}.svg`;
     weatherResults.appendChild(iconDisplay);
+
+    //run getGif, using icon as input
+    getGif(icon);
+}
+
+//write function to get gif from giphy
+const getGif= async function(searchTerm){
+    const response=await fetch(`https://api.giphy.com/v1/gifs/search?api_key=lSaPK1xtdipOD5FBO6qLflCfev5umows&q=${searchTerm}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
+    const results=await response.json();
+    console.log(results);
+    const url=results.data[0].images.original.url;
+    gif.src=url;
 }
 
 //add event listener to form
@@ -90,6 +103,7 @@ form.addEventListener("submit",(e)=>{
     const city=citySearch.value;
     let units=unitChoice.value;
     fetchWeather(city,units);
+    
 
     //add button to toggleUnits div, allowing user to toggle units
     const toggleUnitsButton =document.createElement("button");
@@ -122,19 +136,9 @@ form.addEventListener("submit",(e)=>{
     })
 })
 
-//Try setting cityImage to a pic of toronto
-const gif=document.querySelector(".giphDisplay img");
 
-//write function to get gif from giphy
-const getGif= async function(searchTerm){
-    const response=await fetch(`https://api.giphy.com/v1/gifs/search?api_key=lSaPK1xtdipOD5FBO6qLflCfev5umows&q=${searchTerm}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
-    const results=await response.json();
-    console.log(results);
-    const url=results.data[0].images.original.url;
-    gif.src=url;
-}
 
-getGif("soccer");
+
 
 
 
