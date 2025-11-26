@@ -92,7 +92,9 @@ const getGif= async function(searchTerm){
     const response=await fetch(`https://api.giphy.com/v1/gifs/search?api_key=lSaPK1xtdipOD5FBO6qLflCfev5umows&q=${searchTerm}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
     const results=await response.json();
     console.log(results);
-    const url=results.data[0].images.original.url;
+    const randomIndex=Math.floor(Math.random()*25);
+    console.log(randomIndex);
+    const url=results.data[randomIndex].images.original.url;
     gif.src=url;
 }
 
