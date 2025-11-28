@@ -5,6 +5,8 @@ const unitChoice=document.querySelector("#units");
 const toggleUnits=document.querySelector(".toggleUnits");
 const gif=document.querySelector(".giphDisplay img");
 const movies=document.querySelector(".movieDisplay");
+const movieForm=document.querySelector("#movieSearchForm");
+const movieTitle=document.querySelector("#movie");
 
 const key="Q4ZEAHEY26Q25F7A4ZP6YLT6H"
 
@@ -146,6 +148,9 @@ const getMovie=async function(title) {
     const keys=Object.keys(results);
     console.log(results);
 
+    //clear the movies div
+    removeChilden(movies);
+
     //create a table and fill with row headers for each info type
     const table=document.createElement("table");
     movies.appendChild(table);
@@ -166,7 +171,13 @@ const getMovie=async function(title) {
 
 }
 
-getMovie("Blade Runner");
+//add event listener for the movie search form
+movieForm.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const movie=movieTitle.value;
+    getMovie(movie);
+})
+
 
 
 
