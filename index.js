@@ -154,19 +154,18 @@ const getMovie=async function(title) {
     //create a table and fill with row headers for each info type
     const table=document.createElement("table");
     movies.appendChild(table);
-    const rowHeaders=document.createElement("tr");
-    table.appendChild(rowHeaders);
-    const rowInfo=document.createElement("tr");
-    table.appendChild(rowInfo);
 
 
     for(let key of keys){
+        //Make a row,make a header, and  a data entry and append to row, then make new row on next iteration
+        const row=document.createElement("tr");
         const header=document.createElement("th");
         header.textContent=key;
-        rowHeaders.appendChild(header);
+        row.appendChild(header);
         const info=document.createElement("td");
         info.textContent=results[key];
-        rowInfo.appendChild(info);
+        row.appendChild(info);
+        table.appendChild(row);
     }
 
 }

@@ -30,3 +30,7 @@ h1{
     width: 100px;
     height: 100px;
 }
+
+td,th {
+    border: 1px solid black;
+}
