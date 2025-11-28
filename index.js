@@ -4,6 +4,7 @@ const citySearch=document.querySelector("#city");
 const unitChoice=document.querySelector("#units");
 const toggleUnits=document.querySelector(".toggleUnits");
 const gif=document.querySelector(".giphDisplay img");
+const movies=document.querySelector(".movieDisplay");
 
 const key="Q4ZEAHEY26Q25F7A4ZP6YLT6H"
 
@@ -138,6 +139,34 @@ form.addEventListener("submit",(e)=>{
     })
 })
 
+//write a function to fetch movie data
+const getMovie=async function(title) {
+    const response=await fetch(`https://www.omdbapi.com/?apikey=7bf6fa45&t=${title}`);
+    const results=await response.json();
+    const keys=Object.keys(results);
+    console.log(results);
+
+    //create a table and fill with row headers for each info type
+    const table=document.createElement("table");
+    movies.appendChild(table);
+    const rowHeaders=document.createElement("tr");
+    table.appendChild(rowHeaders);
+    const rowInfo=document.createElement("tr");
+    table.appendChild(rowInfo);
+
+
+    for(let key of keys){
+        const header=document.createElement("th");
+        header.textContent=key;
+        rowHeaders.appendChild(header);
+        const info=document.createElement("td");
+        info.textContent=results[key];
+        rowInfo.appendChild(info);
+    }
+
+}
+
+getMovie("Blade Runner");
 
 
 
